@@ -1,0 +1,41 @@
+
+
+  # I can create comment here - this is great
+  # by default docker-compose creates a single network for your app.
+  # Each container for a service joins the default network and is both reachable by other containers on that network,
+  # and discoverable by them at a hostname identical to the container name
+  #
+  # Docker compose file http://localhost:8080/swagger-ui.htm
+  # used the following as reference.  https://www.callicoder.com/spring-boot-mysql-react-docker-compose-example/
+
+  version: '3'
+
+# Backend service
+  services:
+    mongodb:
+      container_name: mongo
+      image: mongo:4.2.0
+      ports:
+        - "27017:27017"
+      volumes:
+        - db_data:/data/db
+        - /data/configdb
+      networks:
+        - backend
+
+    spring:
+      container_name: banking_container
+      image: banking_image
+      ports:
+        - "8080:8080"
+      networks:
+        - backend
+
+
+# Volumes - shared data between services
+  volumes:
+    db_data:
+
+# Networks - to be created  - backend for now - front end when done.
+  networks:
+    backend:
