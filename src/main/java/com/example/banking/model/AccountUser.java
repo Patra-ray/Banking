@@ -1,27 +1,29 @@
 package com.example.banking.model;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "users")
+@Document
 public class User {
+
     @Id
-    private String id;
+    private ObjectId _Id;
     private String name;
-    private int age;
-    public User() {
-    }
+    private String password;
 
-    public User(String name, int age) {
+    public User(ObjectId _Id, String name, String password) {
+        this._Id = _Id;
         this.name = name;
-        this.age = age;
+        this.password = password;
     }
 
-    public String getId() {
-        return id;
+    public String get_Id() {
+        return _Id.toHexString();
     }
-    public void setId(String id) {
-        this.id = id;
+
+    public void set_Id(ObjectId _Id) {
+        this._Id = _Id;
     }
 
     public String getName() {
@@ -31,17 +33,19 @@ public class User {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
+    public String getPassword() {
+        return password;
     }
-    public void setAge(int age) {
-        this.age = age;
+
+    public void setPassword(String password) {
+        this.password = password;
     }
+
     @Override
     public String toString() {
         return "User{" +
                 ", name='" + name + '\'' +
-                ", Age=" + age +
+                ", password="  + "???" +
                 '}';
     }
 }
